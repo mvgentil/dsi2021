@@ -1,4 +1,4 @@
-package br.univille.mvgentildsi2021.Controller;
+package br.univille.mvgentildsi2021.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
