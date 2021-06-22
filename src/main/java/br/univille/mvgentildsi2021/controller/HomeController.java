@@ -13,9 +13,9 @@ public class HomeController {
     @GetMapping()
     public ModelAndView index(){
 
-        String nomeDoSistema = "VESTIRE";
+        //String nomeDoSistema = "VESTIRE";
 
-        return new ModelAndView("home/index","nome",nomeDoSistema);
+        return new ModelAndView("home/index");
     }
 
 }
