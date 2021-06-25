@@ -17,6 +17,7 @@
                         <th>Telefone</th>
                         <th>CPF</th>
                         <th>Score</th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -26,6 +27,7 @@
                         <td th:text="${umCliente.telefone}"></td>
                         <td th:text="${umCliente.CPF}"></td>
                         <td th:text="${umCliente.score}"></td>
+                        <td><a th:href="@{'/cliente/alterar/'+${umCliente.Id}}" class="btn btn-secondary">Alterar</a></td>
                     </tr>
                 </tbody>
             </table>

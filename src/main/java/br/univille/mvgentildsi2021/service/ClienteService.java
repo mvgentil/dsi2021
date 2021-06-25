@@ -10,5 +10,6 @@ import br.univille.mvgentildsi2021.model.Cliente;
 public interface ClienteService {
   
   public List<Cliente> getAll();
+  public void save(Cliente cliente);
 
 }
