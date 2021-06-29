@@ -10,7 +10,7 @@
 
             <a th:href="@{/cliente/novo}" class="btn btn-primary">Novo Cliente </a>
             
-            <table class="table">
+            <table class="table" id="clientes">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -27,7 +27,20 @@
                         <td th:text="${umCliente.telefone}"></td>
                         <td th:text="${umCliente.CPF}"></td>
                         <td th:text="${umCliente.score}"></td>
-                        <td><a th:href="@{'/cliente/alterar/'+${umCliente.Id}}" class="btn btn-secondary">Alterar</a></td>
+                        <td>
+                            <a th:href="@{'/cliente/alterar/'+${umCliente.Id}}" 
+                            class="btn btn-secondary">
+                                Alterar
+                            </a>
+
+                            <button class="btn btn-danger js-delete"
+                                th:data-id="${umCliente.Id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" 
+                                aria-hidden="true">
+                                </span>
+                                Excluir
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -36,5 +49,16 @@
         
         
         <div th:include="layout :: footer">(footer)</div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#clientes").on('click', ".js-delete", function(){
+                    bootbox.confirm("Confirma a exclusão do registro?", function(result){
+                        console.log(result);
+                    });
+                });
+            });
+        </script>
+
     </body>
 </html> 
