@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+            
+            <div class="border border-dark">
+              <form th:action="@{/produto/(form)}" th:object="${produto}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                  <div class="row">
+                      <div class="col-6">
+                        <label>Código:</label>
+                        <input type="text" th:field="*{codigo}" class="form-control">
+                      </div>
+                  </div>
+                </div>
+
+               <div class="form-group">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Descrição:</label>
+                      <input type="text" th:field="*{descricao}" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                   <div class="row">
+                      <div class="col-6">
+                        <label>Preço no fornecedor:</label>
+                        <input type="text" th:field="*{precoFornecedor}" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                       <div class="col-6">
+                         <label>Quantidade no estoque:</label>
+                         <input type="text" th:field="*{qtdEstoque}" class="form-control">
+                       </div>
+                     </div>
+                   </div>
+                
+
+              <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+            </div>
+        </div>
+        
+        
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html> 

@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.univille.mvgentildsi2021.model.Cliente;
 import br.univille.mvgentildsi2021.service.ClienteService;
 
-
 @Controller
 @RequestMapping("/cliente")
 public class ClienteController {
