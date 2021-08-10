@@ -48,5 +48,4 @@ public class ClienteController {
     service.delete(cliente);
     return new ModelAndView("redirect:/cliente");
   }
-
 }

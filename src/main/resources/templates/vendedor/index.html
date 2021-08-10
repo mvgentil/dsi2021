@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+
+            <a th:href="@{/vendedor/novo}" class="btn btn-primary">Novo Vendedor</a>
+            
+            <table class="table" id="vendedores">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>CPF</th>
+                        <th>Usuário</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="umVendedor : ${listaVendedores}">
+                        <td th:text="${umVendedor.nome}"></td>
+                        <td th:text="${umVendedor.telefone}"></td>
+                        <td th:text="${umVendedor.CPF}"></td>
+                        <td th:text="${umVendedor.usuario}"></td>
+                        <td>
+                            <a th:href="@{'/vendedor/alterar/'+${umVendedor.Id}}" 
+                            class="btn btn-secondary">
+                                Alterar
+                            </a>
+
+                            <button class="btn btn-danger js-delete"
+                                th:data-id="${umVendedor.Id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" 
+                                aria-hidden="true">
+                                </span>
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        
+        
+        <div th:include="layout :: footer">(footer)</div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#vendedores").on('click', ".js-delete", function(){
+                    let button = $(this);
+                    bootbox.confirm("Confirma a exclusão do registro?", function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/vendedor/delete/" + button.attr("data-id"),
+                                method : "GET",
+                                success : function(){
+                                    window.location.href = "/vendedor/"
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+
+    </body>
+</html> 
