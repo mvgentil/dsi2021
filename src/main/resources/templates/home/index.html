@@ -9,7 +9,10 @@
             <nav th:replace="layout :: menu">(menu)</nav>
 
             <h1 th:text="${nome}"></h1>
+
+            <a th:href="@{/venda/novo}" class="btn btn-success btn-lg">Nova Venda</a>
         </div>
+
         
         
         <div th:include="layout :: footer">(footer)</div>

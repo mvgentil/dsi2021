@@ -11,8 +11,16 @@ public class ItemVenda extends Produto {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private float precoVenda;
+  private int qtdVenda;
   
+  public int getQtdVenda() {
+    return qtdVenda;
+  }
+
+  public void setQtdVenda(int qtdVenda) {
+    this.qtdVenda = qtdVenda;
+  }
+
   public long getId() {
     return id;
   }
@@ -20,11 +28,6 @@ public class ItemVenda extends Produto {
   public void setId(long id) {
     this.id = id;
   }
-  public float getPrecoVenda() {
-    return precoVenda;
-  }
-  public void setPrecoVenda(float precoVenda) {
-    this.precoVenda = precoVenda;
-  }
+
 
 }

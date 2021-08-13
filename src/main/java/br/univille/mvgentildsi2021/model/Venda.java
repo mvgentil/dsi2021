@@ -23,7 +23,7 @@ public class Venda {
   private long id;
   @Temporal(value = TemporalType.TIMESTAMP)
   private Date data;
-  private float valor;
+  private float valorTotal;
 
   @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
   private Vendedor vendedor;
@@ -59,11 +59,21 @@ public class Venda {
   public void setData(Date data) {
     this.data = data;
   }
-  public float getValor() {
-    return valor;
+  public float getValorTotal() {
+    return valorTotal;
   }
-  public void setValor(float valor) {
-    this.valor = valor;
+  public void setValor(float valorTotal) {
+    this.valorTotal = valorTotal;
+  }
+
+  public void addItem(ItemVenda item){
+    listaItens.add(item);
+    valorTotal += item.getPrecoVenda() * item.getQtdVenda();
+    item.setQtdEstoque(item.getQtdEstoque()-item.getQtdVenda());
+  }
+
+  public void finalizarVenda(){
+    cliente.setScore(cliente.getScore()+10);
   }
 
   

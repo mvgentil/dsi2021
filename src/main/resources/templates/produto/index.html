@@ -15,7 +15,9 @@
                     <tr>
                         <th>Código</th>
                         <th>Descrição</th>
+                        <th>Tamanho</th>
                         <th>Preço no fornecedor</th>
+                        <th>Preço de venda</th>
                         <th>Quantidade no estoque</th>
                         <th></th>
                     </tr>
@@ -25,7 +27,9 @@
                     <tr th:each="umProduto : ${listaProdutos}">
                         <td th:text="${umProduto.codigo}"></td>
                         <td th:text="${umProduto.descricao}"></td>
+                        <td th:text="${umProduto.tamanho}"></td>
                         <td th:text="${umProduto.precoFornecedor}"></td>
+                        <td th:text="${umProduto.precoVenda}"></td>
                         <td th:text="${umProduto.qtdEstoque}"></td>
                         <td>
                             <a th:href="@{'/produto/alterar/'+${umProduto.Id}}" 

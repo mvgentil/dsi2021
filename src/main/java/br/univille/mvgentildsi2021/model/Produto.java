@@ -13,7 +13,9 @@ public class Produto {
   private long id;
   private String codigo;
   private float precoFornecedor;
+  private float precoVenda;
   private String descricao;
+  private String tamanho;
   private int qtdEstoque;
 
   public long getId() {
@@ -45,6 +47,20 @@ public class Produto {
   }
   public void setQtdEstoque(int qtdEstoque) {
     this.qtdEstoque = qtdEstoque;
+  }
+
+  public float getPrecoVenda() {
+    return precoVenda;
+  }
+  public void setPrecoVenda(float precoVenda) {
+    this.precoVenda = precoVenda;
+  }
+
+  public String getTamanho() {
+    return tamanho;
+  }
+  public void setTamanho(String tamanho) {
+    this.tamanho = tamanho;
   }
 
   
