@@ -8,37 +8,33 @@
         <div class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
 
-            <a th:href="@{/produto/novo}" class="btn btn-primary">Novo Produto</a>
+            <a th:href="@{/venda/novo}" class="btn btn-primary">Nova Venda</a>
             
-            <table class="table" id="produtos">
+            <table class="table" id="vendas">
                 <thead class="thead-light">
                     <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Tamanho</th>
-                        <th>Preço no fornecedor</th>
-                        <th>Preço de venda</th>
-                        <th>Quantidade no estoque</th>
+                        <th>Data</th>
+                        <th>Vendedor</th>
+                        <th>Cliente</th>
+                        <th>Valor Total</th>
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr th:each="umProduto : ${listaProdutos}">
-                        <td th:text="${umProduto.codigo}"></td>
-                        <td th:text="${umProduto.descricao}"></td>
-                        <td th:text="${umProduto.tamanho}"></td>
-                        <td th:text="${umProduto.precoFornecedor}"></td>
-                        <td th:text="${umProduto.precoVenda}"></td>
-                        <td th:text="${umProduto.qtdEstoque}"></td>
+                    <tr th:each="umaVenda : ${listaVendas}">
+                        <td th:text="${umaVenda.data}"></td>
+                        <td th:text="${umaVenda.vendedor}"></td>
+                        <td th:text="${umaVenda.cliente}"></td>
+                        <td th:text="${umaVenda.valorTotal}"></td>
                         <td>
-                            <a th:href="@{'/produto/alterar/'+${umProduto.Id}}" 
+                            <a th:href="@{'/venda/alterar/'+${umaVenda.Id}}" 
                             class="btn btn-secondary">
                                 Alterar
                             </a>
 
                             <button class="btn btn-danger js-delete"
-                                th:data-id="${umProduto.Id}">
+                                th:data-id="${umaVenda.Id}">
                                 <span class="glyphicon glyphicon-exclamation-sign" 
                                 aria-hidden="true">
                                 </span>
@@ -56,15 +52,15 @@
 
         <script type="text/javascript">
             $(document).ready(function(){
-                $("#produtos").on('click', ".js-delete", function(){
+                $("#vendas").on('click', ".js-delete", function(){
                     let button = $(this);
                     bootbox.confirm("Confirma a exclusão do registro?", function(result){
                         if(result){
                             $.ajax({
-                                url : "/produto/delete/" + button.attr("data-id"),
+                                url : "/venda/delete/" + button.attr("data-id"),
                                 method : "GET",
                                 success : function(){
-                                    window.location.href = "/produto/"
+                                    window.location.href = "/venda/"
                                 }
                             });
                         }
