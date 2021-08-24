@@ -16,17 +16,17 @@
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>CPF</th>
-                        <th>Usuário</th>
+
                         <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr th:each="umVendedor : ${listaVendedores}">
+                    <tr scope="row" th:each="umVendedor : ${listaVendedores}">
                         <td th:text="${umVendedor.nome}"></td>
                         <td th:text="${umVendedor.telefone}"></td>
                         <td th:text="${umVendedor.CPF}"></td>
-                        <td th:text="${umVendedor.usuario}"></td>
+                        
                         <td>
                             <a th:href="@{'/vendedor/alterar/'+${umVendedor.Id}}" 
                             class="btn btn-secondary">

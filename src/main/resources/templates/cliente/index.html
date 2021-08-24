@@ -22,7 +22,7 @@
                 </thead>
 
                 <tbody>
-                    <tr th:each="umCliente : ${listaClientes}">
+                    <tr scope="row" th:each="umCliente : ${listaClientes}">
                         <td th:text="${umCliente.nome}"></td>
                         <td th:text="${umCliente.telefone}"></td>
                         <td th:text="${umCliente.CPF}"></td>

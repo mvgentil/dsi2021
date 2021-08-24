@@ -1,5 +1,6 @@
 package br.univille.mvgentildsi2021.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,15 @@ public class VendaController {
 
   @GetMapping("/novo")
   public ModelAndView novo(@ModelAttribute Venda venda){
+    HashMap<String,Object> dados = new HashMap<>();
     List<Vendedor> listaVendedores = vendedor.getAll();
     List<Cliente> listaClientes = cliente.getAll();
     List<Produto> listaProdutos = produto.getAll();
-    return new ModelAndView("venda/form", "listaVendedores", listaVendedores);
-  } //corrigir este metodo, fazer a tela de nova venda mostrar lista de vendedores, lista de clientes e lista de produtos
+    dados.put("listaVendedores", listaVendedores);
+    dados.put("listaClientes", listaClientes);
+    dados.put("listaProdutos", listaProdutos);
+    return new ModelAndView("venda/form", dados);
+  } 
     //ao fechar uma venda, o score do cliente deve aumentar 10 pontos, o estoque do produto deve diminuir
 
   @PostMapping(params = "form")
@@ -56,7 +61,16 @@ public class VendaController {
 
   @GetMapping("/alterar/{id}")
   public ModelAndView alterar(@PathVariable("id") Venda venda){
-    return new ModelAndView("/venda/form","venda",venda);
+    HashMap<String,Object> dados = new HashMap<>();
+    List<Vendedor> listaVendedores = vendedor.getAll();
+    List<Cliente> listaClientes = cliente.getAll();
+    List<Produto> listaProdutos = produto.getAll();
+    dados.put("listaVendedores", listaVendedores);
+    dados.put("listaClientes", listaClientes);
+    dados.put("listaProdutos", listaProdutos);
+    dados.put("venda",venda);
+    
+    return new ModelAndView("/venda/form", dados);
   }
 
   @GetMapping("/delete/{id}")

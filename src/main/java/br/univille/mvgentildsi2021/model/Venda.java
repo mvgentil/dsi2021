@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Venda {
@@ -22,6 +23,7 @@ public class Venda {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   @Temporal(value = TemporalType.TIMESTAMP)
+  @DateTimeFormat(pattern = "dd/MM/yyyy H:mm")
   private Date data;
   private float valorTotal;
 

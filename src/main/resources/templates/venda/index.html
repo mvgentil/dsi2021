@@ -13,7 +13,8 @@
             <table class="table" id="vendas">
                 <thead class="thead-light">
                     <tr>
-                        <th>Data</th>
+                        
+                        <th scope="col">Data</th>
                         <th>Vendedor</th>
                         <th>Cliente</th>
                         <th>Valor Total</th>
@@ -22,8 +23,8 @@
                 </thead>
 
                 <tbody>
-                    <tr th:each="umaVenda : ${listaVendas}">
-                        <td th:text="${umaVenda.data}"></td>
+                    <tr scope="row" th:each="umaVenda : ${listaVendas}">
+                        <td th:text="${#dates.format(umaVenda.data, 'dd/MM/yyyy HH:mm')}"></td>
                         <td th:text="${umaVenda.vendedor}"></td>
                         <td th:text="${umaVenda.cliente}"></td>
                         <td th:text="${umaVenda.valorTotal}"></td>
