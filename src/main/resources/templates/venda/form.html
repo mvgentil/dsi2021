@@ -12,16 +12,29 @@
           
                 <input type="hidden" th:field="*{id}">
 
-                <div class="form-group">
-                  <label for="slcdata">Data da Venda</label>
-                  <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                          th:field="*{data}"/>
-                      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                      </div>
-                  </div>
-              </div>
+
+              <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div>Data da Venda</div>
+                            <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                                <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker4').datetimepicker({
+                                format: "dd/MM/yyyy H:mm"
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
 
               <div class="form-group">
                 <label for="slcVendedor">Vendedor</label>
@@ -31,13 +44,56 @@
             </div>
 
 
-
             <div class="form-group">
               <label for="slcCliente">Cliente</label>
               <select class="form-control" id="slcCliente" th:field="*{cliente}">
                   <option th:each="umCliente : ${listaClientes}" th:value="${umCliente.id}" th:text="${umCliente.nome}"></option>
               </select>
           </div>
+
+          <div class="card">
+            <div class="card-header">Vincular Produtos</div>
+            <div class="card-body">
+                <div class="container" th:object="${itemVenda}">
+                  <div class="row">
+                    <div class="col-sm">
+                        <label for="slcProduto">Produto</label>
+                    </div>
+                    <div class="col-md">
+                        <select class="form-control" id="slcProduto" th:field="*{itemVenda}" placeholder="Produto">
+                            <option th:each="umItem : ${listaItens}" th:value=${umItem.id} th:text="${umItem.descricao"></option>></option>
+                        </select>
+                    </div>
+                        <button type="submit" name="insertItem" class="btn btn-primary">Inserir produto</button>
+                    </div>
+                  </div>
+                </div>
+                <br>                           
+            </div>
+        </div>
+
+        <div class="card">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="umItem, stat : ${venda.listaItens">
+                        <input type="hidden" th:field="${venda.listaItens__${stat.index}__].descricao}"/>
+                        <input type="hidden" th:field="${venda.listaItens__${stat.index}__].valor}"/>
+                        <td th:text="${produto.descricao}"></td>
+                        <td th:text="${produto.valor}"></td>
+                        <td>
+                            <button type="submit" name="removeprod" th:value="__${stat.index}__" class="btn btn-primary">Remover</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 
 
@@ -51,12 +107,5 @@
         
         <div th:include="layout :: footer">(footer)</div>
 
-        <script type="text/javascript">
-          $(function () {
-              $('#datetimepicker1').datetimepicker({
-                  format:"DD/MM/YYYY HH:mm"                  
-              });
-          });
-      </script>
     </body>
 </html> 

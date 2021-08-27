@@ -25,14 +25,14 @@
                 <tbody>
                     <tr scope="row" th:each="umaVenda : ${listaVendas}">
                         <td th:text="${#dates.format(umaVenda.data, 'dd/MM/yyyy HH:mm')}"></td>
-                        <td th:text="${umaVenda.vendedor}"></td>
-                        <td th:text="${umaVenda.cliente}"></td>
+                        <td th:text="${umaVenda.vendedor.nome}"></td>
+                        <td th:text="${umaVenda.cliente.nome}"></td>
                         <td th:text="${umaVenda.valorTotal}"></td>
                         <td>
-                            <a th:href="@{'/venda/alterar/'+${umaVenda.Id}}" 
+                            <!--<a th:href="@{'/venda/alterar/'+${umaVenda.Id}}" 
                             class="btn btn-secondary">
                                 Alterar
-                            </a>
+                            </a>-->
 
                             <button class="btn btn-danger js-delete"
                                 th:data-id="${umaVenda.Id}">
