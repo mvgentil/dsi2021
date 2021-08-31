@@ -37,6 +37,12 @@ public class Venda {
   @JoinColumn(name="venda_id")
   private List<ItemVenda> listaItens = new ArrayList<ItemVenda>();
 
+  public List<ItemVenda> getListaItens() {
+    return listaItens;
+  }
+  public void setListaItens(List<ItemVenda> listaItens) {
+    this.listaItens = listaItens;
+  }
   public Vendedor getVendedor() {
     return vendedor;
   }
