@@ -45,56 +45,63 @@
                     </select>
                 </div>
 
-        </div>
 
-        <div class="card">
-            <div class="card-header">Vincular Produtos</div>
-            <div class="card-body">
-                <div class="container" th:object="${itemVenda}">
-                    <div class="row">
-                        <div class="col-sm">
-                            <label for="slcProduto">Produto</label>
+
+                <div class="card">
+                    <div class="card-header">Vincular Itens</div>
+                    <div class="card-body">
+                        <div class="container" th:object="${produto}">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label for="slcItem">Item</label>
+                                </div>
+                                <div class="col-md">
+                                    <select class="form-control" id="slcItem" th:field="*{itemVenda}"
+                                        placeholder="Item">
+                                        <option th:each="umProduto : ${listaProdutos}" 
+                                                th:value="${umProduto.id}"
+                                                th:text="${umProduto.descricao}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <button type="submit" name="insertItem" class="btn btn-primary">Inserir Item</button>
+                            </div>
                         </div>
-                        <div class="col-md">
-                            <!--<select class="form-control" id="slcProduto" th:field="*{itemVenda}" placeholder="Produto">
-                                <option th:each="umItem : ${listaItens}" th:value=${umItem.id}
-                                    th:text="${umItem.descricao"></option>
-                            </select>-->
-                        </div>
-                        <button type="submit" name="insertItem" class="btn btn-primary">Inserir produto</button>
                     </div>
+                    <br>
                 </div>
-            </div>
-            <br>
+
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="item, stat : ${venda.listaItens">
+                            <input type="hidden" th:field="${venda.listaItens__${stat.index}__].descricao}" />
+                            <input type="hidden" th:field="${venda.listaItens__${stat.index}__].valor}" />
+                            <td th:text="${item.descricao}"></td>
+                            <td th:text="${item.valor}"></td>
+                            <td>
+                                <button type="submit" name="removeItem" th:value="__${stat.index}__"
+                                    class="btn btn-primary">Remover</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary">Concluir Venda</button>
+            </form>
         </div>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Produto</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--<tr scope="row" th:each="umItem, stat : ${venda.listaItens">
-                    <input type="hidden" th:field="${venda.listaItens__${stat.index}__].descricao}" />
-                    <input type="hidden" th:field="${venda.listaItens__${stat.index}__].valor}" />
-                    <td th:text="${produto.descricao}"></td>
-                    <td th:text="${produto.valor}"></td>
-                    <td>
-                        <button type="submit" name="removeprod" th:value="__${stat.index}__"
-                            class="btn btn-primary">Remover</button>
-                    </td>
-                </tr>-->
-            </tbody>
-        </table>
+
+
+
+
+
+
     </div>
-
-    <button type="submit" class="btn btn-primary">Concluir Venda</button>
-    </form>
-
-
-    <div th:include="layout :: footer">(footer)</div>
 
     <script type="text/javascript">
         $(function () {
@@ -103,6 +110,12 @@
             });
         });
     </script>
+
+
+
+    <div th:include="layout :: footer">(footer)</div>
+
+
 
 </body>
 
