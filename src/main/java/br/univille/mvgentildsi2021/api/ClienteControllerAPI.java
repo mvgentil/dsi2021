@@ -2,10 +2,15 @@ package br.univille.mvgentildsi2021.api;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +18,7 @@ import br.univille.mvgentildsi2021.model.Cliente;
 import br.univille.mvgentildsi2021.service.ClienteService;
 
 @RestController
-@RequestMapping("/api/v1/cliente")
+@RequestMapping("/api/v1/clientes")
 public class ClienteControllerAPI {
   
   @Autowired
@@ -22,6 +27,25 @@ public class ClienteControllerAPI {
   @GetMapping
   public ResponseEntity<List<Cliente>> getAll(){
     return new ResponseEntity<List<Cliente>>(service.getAll(), HttpStatus.OK);
+  }
+
+  @PostMapping
+  public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente){
+    try{
+    cliente.setId(0);
+    service.save(cliente);
+    return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+    }catch (Exception ex){
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @GetMapping("/{id}")
+
+  public ResponseEntity<Cliente> getById(@PathVariable("id") Cliente cliente){
+
+      return new ResponseEntity<Cliente>(cliente,HttpStatus.OK);
+
   }
 
 }
