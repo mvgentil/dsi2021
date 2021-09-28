@@ -35,13 +35,13 @@ public class Venda {
 
   @OneToMany
   @JoinColumn(name="venda_id")
-  private List<ItemVenda> listaItens = new ArrayList<ItemVenda>();
+  private List<Produto> listaProdutos = new ArrayList<Produto>();
 
-  public List<ItemVenda> getListaItens() {
-    return listaItens;
+  public List<Produto> getListaProdutos() {
+    return listaProdutos;
   }
-  public void setListaItens(List<ItemVenda> listaItens) {
-    this.listaItens = listaItens;
+  public void setListaProdutos(List<Produto> listaProdutos) {
+    this.listaProdutos = listaProdutos;
   }
   public Vendedor getVendedor() {
     return vendedor;
@@ -74,10 +74,9 @@ public class Venda {
     this.valorTotal = valorTotal;
   }
 
-  public void addItem(ItemVenda item){
-    listaItens.add(item);
-    valorTotal += item.getPrecoVenda() * item.getQtdVenda();
-    item.setQtdEstoque(item.getQtdEstoque()-item.getQtdVenda());
+  public void addItem(Produto item){
+    listaProdutos.add(item);
+
   }
 
   public void finalizarVenda(){

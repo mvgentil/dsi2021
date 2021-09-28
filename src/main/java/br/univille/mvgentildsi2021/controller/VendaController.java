@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.mvgentildsi2021.model.Cliente;
-import br.univille.mvgentildsi2021.model.ItemVenda;
 import br.univille.mvgentildsi2021.model.Produto;
 import br.univille.mvgentildsi2021.model.Venda;
 import br.univille.mvgentildsi2021.model.Vendedor;
@@ -57,45 +56,45 @@ public class VendaController {
   // ao fechar uma venda, o score do cliente deve aumentar 10 pontos, o estoque do
   // produto deve diminuir
 
-  /*@PostMapping(params = "form")
+  @PostMapping(params = "form")
   public ModelAndView save(Venda venda) {
     service.save(venda);
     return new ModelAndView("redirect:/venda");
-  }*/
+  }
 
   @PostMapping(params = {"insertItem"})
-  public ModelAndView insertItem(Venda venda, ItemVenda itemVenda) {
-    venda.addItem(itemVenda);
+  public ModelAndView insertItem(Venda venda, Produto produto) {
+    venda.addItem(produto);
 
     HashMap<String, Object> dados = new HashMap<String, Object>();
     List<Vendedor> listaVendedores = vendedor.getAll();
     List<Cliente> listaClientes = cliente.getAll();
-    List<ItemVenda> listaItens = venda.getListaItens();
+    List<Produto> listaProdutos = venda.getListaProdutos();
     dados.put("listaVendedores", listaVendedores);
     dados.put("listaClientes", listaClientes);
-    dados.put("listaItens", listaItens);
-    dados.put("novoItem", new ItemVenda());
+    dados.put("listaProdutos", listaProdutos);
+    dados.put("novoProduto", new Produto());
 
     return new ModelAndView("venda/form", dados);
   }
 
-  /*
-  @PostMapping(params = {"removeItem"})
-  public ModelAndView removeItem(@RequestParam(name = "removeItem") int index, Venda venda, ItemVenda novoItem) {
+  
+  @PostMapping(params = {"removeProduto"})
+  public ModelAndView removeProduto(@RequestParam(name = "removeProduto") int index, Venda venda, Produto novoProduto) {
 
-    venda.getListaItens().remove(index);
+    venda.getListaProdutos().remove(index);
 
     HashMap<String, Object> dados = new HashMap<String, Object>();
     List<Vendedor> listaVendedores = vendedor.getAll();
     List<Cliente> listaClientes = cliente.getAll();
-    List<ItemVenda> listaItens = venda.getListaItens();
+    List<Produto> listaProdutos = venda.getListaProdutos();
     dados.put("listaVendedores", listaVendedores);
     dados.put("listaClientes", listaClientes);
-    dados.put("listaItens", listaItens);
-    dados.put("novoItem", new ItemVenda());
+    dados.put("listaProdutos", listaProdutos);
+    dados.put("novoProduto", new Produto());
 
     return new ModelAndView("venda/form", dados);
-  }*/
+  }
 
   @GetMapping("/delete/{id}")
   public ModelAndView delete(@PathVariable("id") Venda venda) {
