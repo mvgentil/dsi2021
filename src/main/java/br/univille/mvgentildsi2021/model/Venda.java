@@ -23,7 +23,7 @@ public class Venda {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   @Temporal(value = TemporalType.TIMESTAMP)
-  @DateTimeFormat(pattern = "dd/MM/yyyy H:mm")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date data;
   private float valorTotal;
 
@@ -33,15 +33,16 @@ public class Venda {
   @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
   private Cliente cliente;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name="venda_id")
-  private List<Produto> listaProdutos = new ArrayList<Produto>();
+  private List<ItemVenda> listaItemVenda = new ArrayList<ItemVenda>();
 
-  public List<Produto> getListaProdutos() {
-    return listaProdutos;
+
+  public List<ItemVenda> getListaItemVenda() {
+    return listaItemVenda;
   }
-  public void setListaProdutos(List<Produto> listaProdutos) {
-    this.listaProdutos = listaProdutos;
+  public void setListaItemVenda(List<ItemVenda> listaItemVenda) {
+    this.listaItemVenda = listaItemVenda;
   }
   public Vendedor getVendedor() {
     return vendedor;
@@ -74,8 +75,8 @@ public class Venda {
     this.valorTotal = valorTotal;
   }
 
-  public void addItem(Produto item){
-    listaProdutos.add(item);
+  public void addItem(ItemVenda item){
+    listaItemVenda.add(item);
 
   }
 

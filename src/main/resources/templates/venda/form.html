@@ -16,14 +16,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <div>Data da Venda</div>
-                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
-                                        data-target="#datetimepicker4" />
-                                    <div class="input-group-append" data-target="#datetimepicker4"
-                                        data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
+                                <input type="date" class="form-control" th:field="*{data}"/>
+                                
                             </div>
                         </div>
                     </div>
@@ -50,13 +44,13 @@
                 <div class="card">
                     <div class="card-header">Vincular Produtos</div>
                     <div class="card-body">
-                        <div class="container" th:object="${produto}">
+                        <div class="container" th:object="${itemvenda}">
                             <div class="row">
                                 <div class="col-sm">
                                     <label for="slcProduto">Produto</label>
                                 </div>
                                 <div class="col-md">
-                                    <select class="form-control" id="slcProduto" th:field="${produto}"
+                                    <select class="form-control" id="slcProduto" th:field="${itemvenda.produto}"
                                         placeholder="Produto">
                                         <option th:each="umProduto : ${listaProdutos}" 
                                                 th:value="${umProduto.id}"
@@ -64,34 +58,36 @@
                                         </option>
                                     </select>
                                 </div>
-                                <button type="submit" name="insertProduto" class="btn btn-primary">Inserir Produto</button>
+                                <button type="submit" name="insertItem" class="btn btn-primary">Inserir Produto</button>
                             </div>
                         </div>
                     </div>
                     <br>
                 </div>
 
-                <!--<table class="table">
+                <table class="table">
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">Produto</th>
                             <th scope="col">Valor</th>
+                            <th scope="col">Quantidade</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr scope="row" th:each="item, stat : ${venda.listaProdutos>
-                            <input type="hidden" th:field="${venda.listaProdutos__${stat.index}__].descricao}" />
-                            <input type="hidden" th:field="${venda.listaProdutos__${stat.index}__].valor}" />
-                            <td th:text="${item.descricao}"></td>
-                            <td th:text="${item.valor}"></td>
+                        <tr scope="row" th:each="item, stat : ${venda.listaItemVenda}">
+                            <input type="hidden" th:field="${venda.listaItemVenda[__${stat.index}__].produto}" />
+                            <input type="hidden" th:field="${venda.listaItemVenda[__${stat.index}__].qtdVenda}" />
+                            <td th:text="${item.produto.descricao}"></td>
+                            <td th:text="${item.produto.precoVenda}"></td>
+                            <td th:text="${item.qtdVenda}"></td>
                             <td>
-                                <button type="submit" name="removeProduto" th:value="__${stat.index}__"
+                                <button type="submit" name="removeItem" th:value="__${stat.index}__"
                                     class="btn btn-primary">Remover</button>
                             </td>
                         </tr>
                     </tbody>
-                </table>-->
+                </table>
                 <button type="submit" class="btn btn-primary">Concluir Venda</button>
             </form>
         </div>
