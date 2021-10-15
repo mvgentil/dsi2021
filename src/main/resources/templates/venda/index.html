@@ -14,7 +14,7 @@
                 <thead class="thead-light">
                     <tr>
                         
-                        <th scope="col">Data</th>
+                        <th>Data</th>
                         <th>Vendedor</th>
                         <th>Cliente</th>
                         <th>Valor Total</th>
@@ -24,15 +24,18 @@
 
                 <tbody>
                     <tr scope="row" th:each="umaVenda : ${listaVendas}">
-                        <td th:text="${#dates.format(umaVenda.data, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td th:text="${#dates.format(umaVenda.data, 'dd/MM/yyyy')}"></td>
                         <td th:text="${umaVenda.vendedor.nome}"></td>
                         <td th:text="${umaVenda.cliente.nome}"></td>
-                        <td th:text="${umaVenda.valorTotal}"></td>
+                        <td th:text="'R$' + ${umaVenda.valorTotal}"></td>
+                        
+                        
                         <td>
-                            <!--<a th:href="@{'/venda/alterar/'+${umaVenda.Id}}" 
+
+                            <a th:href="@{'/venda/detalhes/'+${umaVenda.Id}}" 
                             class="btn btn-secondary">
-                                Alterar
-                            </a>-->
+                                Detalhes
+                            </a>
 
                             <button class="btn btn-danger js-delete"
                                 th:data-id="${umaVenda.Id}">
@@ -42,6 +45,7 @@
                                 Excluir
                             </button>
                         </td>
+
                     </tr>
                 </tbody>
             </table>

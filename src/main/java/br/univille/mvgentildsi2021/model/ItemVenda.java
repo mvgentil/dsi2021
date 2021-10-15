@@ -15,7 +15,9 @@ public class ItemVenda {
   private int qtdVenda;
   @ManyToOne
   private Produto produto;
+
   
+
   public Produto getProduto() {
     return produto;
   }

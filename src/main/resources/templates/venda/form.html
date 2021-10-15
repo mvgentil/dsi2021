@@ -46,9 +46,15 @@
                     <div class="card-body">
                         <div class="container" th:object="${itemvenda}">
                             <div class="row">
-                                <div class="col-sm">
-                                    <label for="slcProduto">Produto</label>
-                                </div>
+                                
+                                    <div class="col-sm">
+                                        <label for="qtdVenda">Quantidade</label>
+                                      </div>
+                                      <div class="col-sm">
+                                        <input type="text" class="form-control" id="qtdVenda" 
+                                        th:field="${itemvenda.qtdVenda}" placeholder="Quantidade">
+                                      </div>
+                                
                                 <div class="col-md">
                                     <select class="form-control" id="slcProduto" th:field="${itemvenda.produto}"
                                         placeholder="Produto">

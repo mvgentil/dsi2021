@@ -71,7 +71,6 @@ public class VendaController {
   @PostMapping(params = {"insertItem"})
   public ModelAndView insertItem(Venda venda, ItemVenda itemvenda) {
     venda.addItem(itemvenda);
-
     HashMap<String, Object> dados = new HashMap<String, Object>();
     List<Vendedor> listaVendedores = vendedor.getAll();
     List<Cliente> listaClientes = cliente.getAll();
@@ -102,6 +101,11 @@ public class VendaController {
   public ModelAndView delete(@PathVariable("id") Venda venda) {
     service.delete(venda);
     return new ModelAndView("redirect:/venda");
+  }
+
+  @GetMapping("/detalhes/{id}")
+  public ModelAndView detalhes(@PathVariable("id") Venda venda){
+    return new ModelAndView("venda/detalhes","venda",venda);
   }
 
 }
