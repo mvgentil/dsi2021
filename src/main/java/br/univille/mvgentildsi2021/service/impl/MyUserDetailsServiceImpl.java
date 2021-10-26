@@ -24,5 +24,9 @@ public class MyUserDetailsServiceImpl implements UserDetailsService{
     return new User(usuario.getUsuario(),usuario.getSenha(), new ArrayList<>());
   }
 
+  public Usuario buscaUsuarioSenha(String nomeUsuario, String senhaUsuario){
+    return repository.findByUsuarioAndSenha(nomeUsuario, senhaUsuario);
+}
+
   
 }
